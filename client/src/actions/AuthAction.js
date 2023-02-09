@@ -1,13 +1,13 @@
 import * as AuthApi from "../api/AuthRequest"
 
 
-export const logIn = (FormData) => async (dispatch) => {
+export const logIn = (formData) => async (dispatch) => {
 
     dispatch({type:"AUTH_START"})
 
     try {
-        const {data}=await AuthApi.logIn(FormData)
-        dispatch({type:"AUTH_SUCCES",data:data})
+        const {data}=await AuthApi.logIn(formData)
+        dispatch({type:"AUTH_SUCCESS",data:data})
 
     } catch (error) {
         console.log(error);
@@ -15,12 +15,12 @@ export const logIn = (FormData) => async (dispatch) => {
     }
 }
 
-export const signUp = (FormData) => async (dispatch) => {
+export const signUp = (formData) => async (dispatch) => {
 
     dispatch({type:"AUTH_START"})
 
     try {
-        const {data}=await AuthApi.signUp(FormData)
+        const {data}=await AuthApi.signUp(formData)
         dispatch({type:"AUTH_SUCCES",data:data})
 
     } catch (error) {

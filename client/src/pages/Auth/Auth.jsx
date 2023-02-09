@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './Auth.css'
 import Logo from '../../img/logo.png'
 import { useDispatch } from "react-redux"
-import { logIn, signUp } from '../../actions/AuthActionn'
+import { logIn, signUp } from '../../actions/AuthAction'
 
 const Auth = () => {
   const [isSignUp, setisSignUp] = useState(true);
