@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
-import './Auth.css'
-import Logo from '../../img/logo.png'
-import { useDispatch } from "react-redux"
-import { logIn, signUp } from '../../actions/AuthAction'
+import React, { useState } from "react";
+import './Auth.css';
+import Logo from '../../img/logo.png';
+import { useDispatch } from "react-redux";
+import { logIn, signUp } from '../../actions/AuthAction';
 
 const Auth = () => {
-  const [isSignUp, setisSignUp] = useState(true);
+  const [isSignUp, setIsSignUp] = useState(true);
 
-  const dispatch = useDispatch
+  const dispatch = useDispatch();
 
   const [data, setData] = useState({
     firstname: "",
@@ -59,7 +59,7 @@ const Auth = () => {
       </div>
       {/* rightside */}
       <div className='a-right'>
-        <form className='infoForm authForm' onSubmit={handleSubmit}>
+        <form className="infoForm authForm" onSubmit={handleSubmit}>
           <h3>{isSignUp ? "Sign up" : "Log In"}</h3>
 
           {isSignUp && (
@@ -125,7 +125,7 @@ const Auth = () => {
 
           <div>
             <span style={{ fontSize: '12px', cursor: "pointer" }}
-              onClick={() => { setisSignUp((prev) => !prev); resetForm() }}>
+              onClick={() => { setIsSignUp((prev) => !prev); resetForm() }}>
               {isSignUp ? " Already have an account. Login!" : "Don't have an account? Sign Up"}
             </span>
           </div>
