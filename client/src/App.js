@@ -1,16 +1,35 @@
 
 import "./App.css"
-// import Home from "./pages/home/Home"
+ import Home from "./pages/home/Home"
 // import Profile from "./pages/Profile/Profile";
-import Auth from './pages/Auth/Auth'
+ import Auth from './pages/Auth/Auth'
+
+import { Routes, Route, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+
+
 function App() {
+  const user = useSelector((state) => state.authReducer.authData)
   return (
+
     <div className="App">
-       <div className="blur" style={{top: '-18%',right:'0'}}></div>
-       <div className="blur" style={{top: '36%',left: '-8rem'}}></div>
-       {/* <Home /> */}
-       {/* <Profile /> */}
-       <Auth />
+      <div className="blur" style={{ top: '-18%', right: '0' }}></div>
+      <div className="blur" style={{ top: '36%', left: '-8rem' }}></div>
+
+      <Routes>
+        <Route path="/"
+          element={user ? <Navigate to="Home" /> : <Navigate to='Auth' />} />
+
+        <Route path="/Home"
+          element={user ? <Home /> : <Navigate to='../Auth' />} />
+
+        <Route path="/Auth"
+          element={user ? <Navigate to='../Home' /> : <Auth />} />
+      </Routes>
+      {/* <Home /> */}
+      {/* <Profile /> */}
+
     </div>
   );
 }
