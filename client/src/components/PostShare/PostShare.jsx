@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { uploadImage, uploadPost } from '../../actions/uploadAction'
 
 const PostShare = () => {
-  // const loading = useSelector((state) => state.PostReducer.uploading)
+  const loading = useSelector((state) => state.postReducer.uploading);
   const [image, setImage] = useState(null)
   const imageRef = useRef()
   const dispatch = useDispatch()
@@ -20,7 +20,9 @@ const PostShare = () => {
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       let img = event.target.files[0];
+      
       setImage(img)
+
     }
   }
 
@@ -33,15 +35,18 @@ const PostShare = () => {
       desc: desc.current.value
     }
     if (image) {
+      console.log(image,"daaaaa");
       const data = new FormData()
       const filename = Date.now() + image.name;
       data.append("name", filename)
       data.append("file", image)
       newPost.image = filename;
-      console.log(newPost)
+      console.log(newPost,"newposttttt")
 
+      console.log(data,"eeeeeeeeeeee");
       try {
         dispatch(uploadImage(data))
+        console.log(newPost);
       } catch (error) {
         console.log(error);
       }
@@ -78,8 +83,10 @@ const PostShare = () => {
             <UilSchedule />
             Shedule
           </div>
-          <button className='button ps-button' onClick={handleSubmit}>
-            {/* {loading ? "Uploading..." : "Share"} */}
+          <button className='button ps-button' onClick={handleSubmit}
+            disabled={loading}
+          >
+            {loading ? "Uploading..." : "Share"}
           </button>
           <div style={{ display: "none" }}>
             <input type="file"
