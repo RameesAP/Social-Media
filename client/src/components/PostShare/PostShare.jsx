@@ -25,8 +25,14 @@ const PostShare = () => {
 
     }
   }
+//restset share component
+const reset =()=>{
+  setImage(null);
+  desc.current.value=""
+}
 
 
+///handle post upload
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -34,24 +40,24 @@ const PostShare = () => {
       userId: user._id,
       desc: desc.current.value
     }
+    //if thereis any image and data like description
     if (image) {
-      console.log(image,"daaaaa");
       const data = new FormData()
       const filename = Date.now() + image.name;
       data.append("name", filename)
       data.append("file", image)
       newPost.image = filename;
-      console.log(newPost,"newposttttt")
+      console.log(newPost)
 
-      console.log(data,"eeeeeeeeeeee");
       try {
         dispatch(uploadImage(data))
-        console.log(newPost);
+        console.log(newPost,"hhhooooi");
       } catch (error) {
         console.log(error);
       }
     }
     dispatch(uploadPost(newPost))
+    reset()
   }
 
 
