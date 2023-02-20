@@ -1,5 +1,6 @@
 import UserModal from "../Models/userModel.js";
 import bcrypt from "bcrypt"
+import jwt from 'jsonwebtoken'
 
 //get a user
 
@@ -25,9 +26,9 @@ export const getUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
     const id = req.params.id
-    const { currentUserId, currentUserAdminStatus, password } = req.body
+    const { _id, currentUserId, currentUserAdminStatus, password } = req.body
 
-    if (id === currentUserId || currentUserAdminStatus) {
+    if (id === _id) {
         try {
 
             if (password) {
@@ -36,7 +37,14 @@ export const updateUser = async (req, res) => {
             }
 
             const user = await UserModal.findByIdAndUpdate(id, req.body, { new: true })
-            res.status(200).json(user)
+            console.log(user,"userrrrrrrrrrrrr");
+            const token = jwt.sign(
+                { username: user.username, id: user._id },
+                process.env.JWT_KEY, 
+                { expiresIn: "1h" },
+                
+            );
+            res.status(200).json(user,token)
         } catch (error) {
             res.status(500).json(error)
         }
@@ -76,14 +84,14 @@ export const followUser = async (req, res) => {
     }
     else {
         try {
-            const followUser =await UserModal.findById(id)
-            const followingUser =await UserModal.findById(currentUserId)
+            const followUser = await UserModal.findById(id)
+            const followingUser = await UserModal.findById(currentUserId)
 
             if (!followUser.followers.includes(currentUserId)) {
                 await followUser.updateOne({ $push: { followers: currentUserId } })
                 await followingUser.updateOne({ $push: { following: id } })
                 res.status(200).json("User followed!")
-            }else{
+            } else {
                 res.status(403).json("User is Already followed by you")
             }
         } catch (error) {
@@ -104,14 +112,14 @@ export const UnFollowUser = async (req, res) => {
     }
     else {
         try {
-            const followUser =await UserModal.findById(id)
-            const followingUser =await UserModal.findById(currentUserId)
+            const followUser = await UserModal.findById(id)
+            const followingUser = await UserModal.findById(currentUserId)
 
             if (followUser.followers.includes(currentUserId)) {
                 await followUser.updateOne({ $pull: { followers: currentUserId } })
                 await followingUser.updateOne({ $pull: { following: id } })
                 res.status(200).json("User UnFollowed!")
-            }else{
+            } else {
                 res.status(403).json("User is not followed by you")
             }
         } catch (error) {

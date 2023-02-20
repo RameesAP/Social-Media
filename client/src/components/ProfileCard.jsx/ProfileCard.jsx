@@ -8,6 +8,7 @@ import './ProfileCard.css'
 const ProfileCard = ({location}) => {
 
   const { user } = useSelector((state) => state.authReducer.authData)
+  const posts = useSelector((state)=>state.postReducer.posts)
   const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER
 
 
@@ -44,7 +45,7 @@ const ProfileCard = ({location}) => {
 
               </div>
               <div className='follow'>
-                <span>3</span>
+                <span>{posts.filter((post)=>post.userId===user._id).length}</span>
                 <span>Posts</span>
               </div>
             </>
@@ -53,13 +54,13 @@ const ProfileCard = ({location}) => {
 
         <hr />
       </div>
-      {location === "profilePage" ? '' : <span>
+      {location === "profilePage" ? ('') : (<span>
 
         <Link style={{textDecoration:"none", color:"inherit"}} to={`/profile/${user._id}`}>
           My Profile
         </Link>
 
-      </span>}
+      </span>) }
 
     </div>
   )
