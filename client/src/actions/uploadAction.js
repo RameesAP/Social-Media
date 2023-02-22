@@ -6,7 +6,7 @@ export const uploadImage = (data) => async (dispatch) => {
         console.log(data,"helllloooooooo");
         await UploadApi.uploadImage(data)
     } catch (error) {
-        // console.log(error,"hellooooo")
+        console.log(error,"hellooooo")
     }
 }
 

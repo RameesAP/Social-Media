@@ -26,7 +26,7 @@ export const getUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
     const id = req.params.id
-    const { _id, currentUserId, currentUserAdminStatus, password } = req.body
+    const { _id, currentUserAdminStatus, password } = req.body;
 
     if (id === _id) {
         try {
@@ -36,15 +36,16 @@ export const updateUser = async (req, res) => {
                 req.body.password = await bcrypt.hash(password, salt)
             }
 
-            const user = await UserModal.findByIdAndUpdate(id, req.body, { new: true })
-            console.log(user,"userrrrrrrrrrrrr");
+            const user = await UserModal.findByIdAndUpdate(id, req.body, { new: true });
+            // console.log(user, "userrrrrrrrrrrrr");
             const token = jwt.sign(
                 { username: user.username, id: user._id },
-                process.env.JWT_KEY, 
-                { expiresIn: "1h" },
-                
+                process.env.JWT_KEY,
+                { expiresIn: "1h" }
+
             );
-            res.status(200).json(user,token)
+            console.log(token,user, "tokennnnnnnnnnn");
+            res.status(200).json({user,token})
         } catch (error) {
             res.status(500).json(error)
         }
