@@ -33,6 +33,8 @@ function ProfileModal({ modalOpened, setModalOpened, data }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+
         let UserData = formData;
         if (profileImage) {
             const data = new FormData();
@@ -40,6 +42,8 @@ function ProfileModal({ modalOpened, setModalOpened, data }) {
             data.append("name", fileName);
             data.append("file", profileImage);
             UserData.profilePicture = fileName;
+            console.log(data,"dataaaaaaaaa");
+            console.log(UserData,"UserDataaaaaaaa");
 
             try {
                 dispatch(uploadImage(data))
@@ -53,13 +57,16 @@ function ProfileModal({ modalOpened, setModalOpened, data }) {
             data.append("name", fileName);
             data.append("file", coverImage);
             UserData.coverImage = fileName;
-
+            console.log(data,"dataaaaaaaa");
+            console.log(UserData,"Coverrrrrr");
             try {
+
                 dispatch(uploadImage(data))
             } catch (error) {
                 console.log(error);
             }
         }
+        console.log(UserData,"Coverrrrrr");
 
         dispatch(updateUser(param.id, UserData))
         setModalOpened(false)
