@@ -36,14 +36,13 @@ function ProfileModal({ modalOpened, setModalOpened, data }) {
 
 
         let UserData = formData;
+
         if (profileImage) {
             const data = new FormData();
-            const fileName = Date.now() + profileImage.name;
-            data.append("name", fileName);
+            const filename = Date.now() + profileImage.name;
+            data.append("name", filename);
             data.append("file", profileImage);
-            UserData.profilePicture = fileName;
-            console.log(data,"dataaaaaaaaa");
-            console.log(UserData,"UserDataaaaaaaa");
+            UserData.profilePicture = filename;
 
             try {
                 dispatch(uploadImage(data))
@@ -53,12 +52,10 @@ function ProfileModal({ modalOpened, setModalOpened, data }) {
         }
         if (coverImage) {
             const data = new FormData();
-            const fileName = Date.now() + coverImage.name;
-            data.append("name", fileName);
+            const filename = Date.now() + coverImage.name;
+            data.append("name", filename);
             data.append("file", coverImage);
-            UserData.coverImage = fileName;
-            console.log(data,"dataaaaaaaa");
-            console.log(UserData,"Coverrrrrr");
+            UserData.coverImage = filename;
             try {
 
                 dispatch(uploadImage(data))
@@ -66,8 +63,7 @@ function ProfileModal({ modalOpened, setModalOpened, data }) {
                 console.log(error);
             }
         }
-        console.log(UserData,"Coverrrrrr");
-
+ 
         dispatch(updateUser(param.id, UserData))
         setModalOpened(false)
     }
@@ -81,7 +77,7 @@ function ProfileModal({ modalOpened, setModalOpened, data }) {
             opened={modalOpened}
             onClose={() => setModalOpened(false)}
         >
-            <form className='infoForm'>
+            <form className='infoForm' action='post'>
                 <h3>Your info</h3>
                 <div>
                     <input
@@ -162,7 +158,7 @@ function ProfileModal({ modalOpened, setModalOpened, data }) {
                     />
                 </div>
 
-                <button className='button infoButton' onClick={handleSubmit}>Update</button>
+                <button className='button infoButton' type='submit' onClick={handleSubmit}>Update</button>
             </form>
             
         </Modal>
