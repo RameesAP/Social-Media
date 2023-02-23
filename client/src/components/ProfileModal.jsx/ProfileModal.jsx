@@ -22,51 +22,44 @@ function ProfileModal({ modalOpened, setModalOpened, data }) {
     }
 
     const onImageChange = (event) => {
-        if (event.target.file && event.target.file[0]) {
-            let img = event.target.file[0];
+        if (event.target.files && event.target.files[0]) {
+            let img = event.target.files[0];
             event.target.name === "profileImage"
                 ? setProfileImage(img)
                 : setCoverImage(img);
         }
-       
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-
         let UserData = formData;
-
         if (profileImage) {
             const data = new FormData();
-            const filename = Date.now() + profileImage.name;
-            data.append("name", filename);
+            const fileName = Date.now() + profileImage.name;
+            data.append("name", fileName);
             data.append("file", profileImage);
-            UserData.profilePicture = filename;
-
+            UserData.profilePicture = fileName;
             try {
-                dispatch(uploadImage(data))
-            } catch (error) {
-                console.log(error);
+                dispatch(uploadImage(data));
+            } catch (err) {
+                console.log(err);
             }
         }
         if (coverImage) {
             const data = new FormData();
-            const filename = Date.now() + coverImage.name;
-            data.append("name", filename);
+            const fileName = Date.now() + coverImage.name;
+            data.append("name", fileName);
             data.append("file", coverImage);
-            UserData.coverImage = filename;
+            UserData.coverPicture = fileName;
             try {
-
-                dispatch(uploadImage(data))
-            } catch (error) {
-                console.log(error);
+                dispatch(uploadImage(data));
+            } catch (err) {
+                console.log(err);
             }
         }
- 
-        dispatch(updateUser(param.id, UserData))
-        setModalOpened(false)
-    }
+        dispatch(updateUser(param.id, UserData));
+        setModalOpened(false);
+    };
 
     return (
         <Modal
@@ -160,7 +153,7 @@ function ProfileModal({ modalOpened, setModalOpened, data }) {
 
                 <button className='button infoButton' type='submit' onClick={handleSubmit}>Update</button>
             </form>
-            
+
         </Modal>
     );
 }
