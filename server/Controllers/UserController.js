@@ -2,6 +2,24 @@ import UserModal from "../Models/userModel.js";
 import bcrypt from "bcrypt"
 import jwt from 'jsonwebtoken'
 
+
+//get all users
+
+export const getAllUsers = async (req, res) => {
+    try {
+        let users = await UserModal.find()
+
+        users = users.map((user) => {
+            const { password, ...otherDetails } = user._doc
+            return otherDetails
+        })
+        res.status(200).json(users)
+    } catch (error) {
+        res.status(500).json(error)
+
+    }
+}
+
 //get a user
 
 export const getUser = async (req, res) => {
@@ -44,8 +62,8 @@ export const updateUser = async (req, res) => {
                 { expiresIn: "1h" }
 
             );
-            console.log(token,user, "tokennnnnnnnnnn");
-            res.status(200).json({user,token})
+            console.log(token, user, "tokennnnnnnnnnn");
+            res.status(200).json({ user, token })
         } catch (error) {
             res.status(500).json(error)
         }
