@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import './FollowersCard.css'
 import User from '../User/User'
 
-import { Followers } from '../Data/FollowersData'
 import { useSelector } from 'react-redux'
 import { getAllUser } from '../../api/UserRequest'
 
@@ -22,12 +21,15 @@ const FollowersCard = () => {
     return (
         <div className='FollowersCard'>
             <h3>People you may know</h3>
-            {Followers.map((person, id) => {
-                return (
+            {persons.map((person, id) => {
+                if(person._id !== user._id){
 
-                    <User person={person} key={id} />
+                
+                return <User person={person} key={id} />
 
-                )
+                }    
+
+                
             })}
         </div>
     )
