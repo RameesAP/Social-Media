@@ -10,6 +10,8 @@ import PostRoute from "./Routes/PostRoute.js"
 import UploadRoute from "./Routes/UploadRoute.js"
 
 import ChatRoute from './Routes/ChatRoute.js'
+import MessageRoute from './Routes/MessageRoute.js'
+
 //Router
 
 const app = express();
@@ -40,3 +42,4 @@ app.use("/user", UserRoute)
 app.use("/post", PostRoute)
 app.use("/upload", UploadRoute)
 app.use("/chat", ChatRoute)
+app.use("/message", MessageRoute)
