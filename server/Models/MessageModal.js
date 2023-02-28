@@ -16,6 +16,6 @@ const MessageSchema = new mongoose.Schema({
     }
 );
 
-const MessageModal=mongoose.model("Message",MessageModal)
+const MessageModal=mongoose.model("Message",MessageSchema)
 
 export default MessageModal
