@@ -12,7 +12,6 @@ const Conversation = ({ data, currentUserId }) => {
             try {
                 const { data } = await getUser(userId)
                 setUserData(data)
-                console.log(data, "data");
             } catch (error) {
                 console.log(error);
             }
@@ -21,22 +20,26 @@ const Conversation = ({ data, currentUserId }) => {
         getUserData();
     }, [])
     return (
-        <div className='follower conversation'>
-            <div>
-                <div className='online-dot'></div>
-                <img src={userData?.profilePicture ? process.env.
-                    REACT_APP_PUBLIC_FOLDER + userData.profilePicture : process.env.REACT_APP_PUBLIC_FOLDER + 'defaultProfile.png'} alt=""
-                    className='followerImage'
-                    style={{width:'50px',height:'50px'}}
+        <>
+            <div className='follower conversation'>
+                <div>
+                    <div className='online-dot'></div>
+                    <img src={userData?.profilePicture ? process.env.
+                        REACT_APP_PUBLIC_FOLDER + userData.profilePicture : process.env.REACT_APP_PUBLIC_FOLDER + 'defaultProfile.png'} alt=""
+                        className='followerImage'
+                        style={{ width: '50px', height: '50px' }}
                     />
-                    <div className='name' style={{fontSize:"0.8rem"}}>
+                    <div className='name' style={{ fontSize: "0.8rem" }}>
                         <span>{userData?.firstname} {userData?.lastname}</span>
                         <span>Online</span>
                     </div>
 
+                </div>
+
             </div>
 
-        </div>
+            <hr style={{width:'85%',border:'0.1px solid #ececec'}}/>
+        </>
     )
 }
 

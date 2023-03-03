@@ -7,6 +7,14 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from "react-redux"
 import { userChats } from '../../api/ChatRequest'
 import Conversation from '../../components/Conversation/Conversation'
+import { Link } from 'react-router-dom'
+import { UilSetting } from '@iconscout/react-unicons'
+import Home from '../../img/home.png'
+import Noti from '../../img/noti.png'
+import Comment from '../../img/comment.png'
+import ChatBox from '../../components/ChatBox/ChatBox'
+
+
 
 const Chat = () => {
 
@@ -14,6 +22,8 @@ const Chat = () => {
     const { user } = useSelector((state) => state.authReducer.authData)
 
     const [chats, setChats] = useState([])
+
+    const [currentChat,setCurrentChat]=useState(null)
 
     useEffect(() => {
         const getChat = async () => {
@@ -36,9 +46,9 @@ const Chat = () => {
                 <div className="Chat-container">
                     <h2>Chats</h2>
                     <div className='Chat-list'>
-                        {chats.map((chat)=>(
-                            <div>
-                                <Conversation data={chat} currentUserId={user._id}/>
+                        {chats.map((chat) => (
+                            <div onClick={()=>setCurrentChat(chat)}>
+                                <Conversation data={chat} currentUserId={user._id} />
                             </div>
                         ))}
                     </div>
@@ -49,7 +59,23 @@ const Chat = () => {
 
             {/* Right Side */}
             <div className='Left-side-chat'>
-                <h2>Right Side</h2>
+                <div style={{ width: '20rem', alignSelf: 'flex-end' }}>
+                    <div className="navIcons">
+                        <Link to="../home">
+                            <img src={Home} alt="" />
+                        </Link>
+                        <UilSetting />
+                        <img src={Noti} alt="" />
+
+                        <Link to='../chat'>
+                            <img src={Comment} alt="" />
+                        </Link>
+
+                    </div>
+                    {/* chat Body */}
+
+                    <ChatBox chat={currentChat} currentUser={user._id}/>
+                </div>
             </div>
 
 
