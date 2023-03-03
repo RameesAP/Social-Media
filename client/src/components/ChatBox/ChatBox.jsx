@@ -2,10 +2,17 @@
 import React, { useEffect, useState } from 'react'
 import "./ChatBox.css";
 import { getUser } from '../../api/UserRequest';
+import { getMessages } from '../../api/MessageRequest';
+import { format } from "timeago.js"
+import InputEmoji from 'react-input-emoji'
+
 
 const ChatBox = ({ chat, currentUser }) => {
 
     const [userData, setUserData] = useState(null)
+    const [messages, setMessages] = useState([])
+    const [newMessage, setNewMessage] = useState("")
+
 
 
     //fetching data for header
@@ -15,7 +22,6 @@ const ChatBox = ({ chat, currentUser }) => {
             try {
                 const { data } = await getUser(userId)
                 setUserData(data)
-                console.log(data);
             } catch (error) {
                 console.log(error);
             }
@@ -26,10 +32,30 @@ const ChatBox = ({ chat, currentUser }) => {
 
     }, [chat, currentUser])
 
+    // fetching data for messages
+
+    useEffect(() => {
+        const fetchMessages = async () => {
+            try {
+                const { data } = await getMessages(chat._id);
+                console.log(data, "dataa");
+                setMessages(data)
+
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        if (chat !== null) fetchMessages()
+    }, [chat])
+
+    const handleChange = (newMessage) => {
+        setNewMessage(newMessage)
+    }
+
     return (
         <>
             <div className="ChatBox-container">
-                <>
+                {chat ? (<>
                     <div className="chat-header">
                         <div className='follower'>
                             <div>
@@ -54,11 +80,45 @@ const ChatBox = ({ chat, currentUser }) => {
                             </div>
 
                         </div>
-                        <hr style={{width:'85%',border:'0.1px solid #ececec'}}/>
+                        <hr style={{ width: '85%', border: '0.1px solid #ececec' }} />
 
 
                     </div>
-                </>
+
+                    {/* chatBox Message */}
+
+                    <div className="chat-body">
+                        {messages.map((message) => (
+
+                            <>
+                                <div className={message.senderId === currentUser ? "message own" : "message"}>
+                                    <span>{message.text}</span>
+                                    <span>{format(message.createdAt)}</span>
+                                </div>
+                            </>
+
+                        ))}
+
+                    </div>
+                    {/* chat sender */}
+
+                    <div className="chat-sender">
+                        <div>+</div>
+                        <InputEmoji
+
+                            value={newMessage}
+                            onChange={handleChange}
+                        />
+                        <div className="send-button button">Send</div>
+                    </div>
+                </>) : (
+
+                    <span className='chatbox-empty-message'>
+                        Tap on a Chat to start conversation...
+                    </span>
+
+                )}
+
 
             </div>
         </>

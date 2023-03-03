@@ -23,7 +23,7 @@ const Chat = () => {
 
     const [chats, setChats] = useState([])
 
-    const [currentChat,setCurrentChat]=useState(null)
+    const [currentChat, setCurrentChat] = useState(null)
 
     useEffect(() => {
         const getChat = async () => {
@@ -47,7 +47,7 @@ const Chat = () => {
                     <h2>Chats</h2>
                     <div className='Chat-list'>
                         {chats.map((chat) => (
-                            <div onClick={()=>setCurrentChat(chat)}>
+                            <div onClick={() => setCurrentChat(chat)}>
                                 <Conversation data={chat} currentUserId={user._id} />
                             </div>
                         ))}
@@ -72,10 +72,11 @@ const Chat = () => {
                         </Link>
 
                     </div>
-                    {/* chat Body */}
 
-                    <ChatBox chat={currentChat} currentUser={user._id}/>
                 </div>
+                {/* chat Body */}
+
+                <ChatBox chat={currentChat} currentUser={user._id} />
             </div>
 
 
