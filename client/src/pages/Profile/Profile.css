@@ -9,3 +9,22 @@
     flex-direction: column;
     gap: 1rem;
 }
+
+@media only screen and (max-width: 1250px) {
+    .Profile {
+      grid-template-columns: 18rem auto;
+    }
+    .RightSide{
+        display: none ;
+    }
+    
+  }
+  
+  @media only screen and (max-width: 900px) {
+    .Profile {
+      grid-template-columns: auto;
+    }
+    .infoCard {
+      display: none;
+    }
+  }
