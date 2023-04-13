@@ -140,7 +140,7 @@ const ChatBox = ({ chat, currentUser, setSendMessage, recieveMessage }) => {
                                     className={message.senderId === currentUser
                                         ? "message own"
                                         : "message"}>
-                                    <span>{message.text}</span>
+                                    <span>{message.text}</span>{" "}
                                     <span>{format(message.createdAt)}</span>
                                 </div>
                             </>
