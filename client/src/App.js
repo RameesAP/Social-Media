@@ -21,12 +21,12 @@ function App() {
 
       <Routes>
         <Route path="/"
-          element={user ? <Navigate to="Home" /> : <Navigate to='Auth' />} />
+          element={user ? <Navigate to="Home" /> : <Navigate to='auth' />} />
 
         <Route path="/Home"
-          element={user ? <Home /> : <Navigate to='../Auth' />} />
+          element={user ? <Home /> : <Navigate to='../auth' />} />
 
-        <Route path="/Auth"
+        <Route path="/auth"
           element={user ? <Navigate to='../Home' /> : <Auth />} />
 
         <Route path="/profile/:id"
