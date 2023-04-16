@@ -27,7 +27,7 @@ app.use('/images', express.static("images"))
 app.use(bodyParser.json({ limit: "30mb", extended: true }))
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }))
 app.use(cors({
-    origin: 'https://frabjous-gnome-9a864e.netlify.app',
+    origin: 'https://clever-klepon-126e28.netlify.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS']
 }))
 app.use(morgan('dev'))
