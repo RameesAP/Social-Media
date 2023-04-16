@@ -12,7 +12,7 @@ const Auth = () => {
 
   const [isSignUp, setIsSignUp] = useState(true);
 
-  console.log(loading);
+  // console.log(loading);
 
   const [data, setData] = useState({
     firstname: "",
