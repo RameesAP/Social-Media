@@ -134,8 +134,7 @@ const Auth = () => {
               {isSignUp ? " Already have an account. Login!" : "Don't have an account? Sign Up"}
             </span>
           </div>
-          <button className='button infoButton' type='submit' >{isSignUp ? "SignUp" : "Login"}</button>
-          {/* <button className='button infoButton' type='submit' disabled={loading}>{loading?"Loading..." : isSignUp ? "SignUp" : "Login"}</button> */}
+          <button className='button infoButton' type='submit' disabled={loading}>{loading?"Loading..." : isSignUp ? "SignUp" : "Login"}</button>
         </form>
       </div>
     </div>
