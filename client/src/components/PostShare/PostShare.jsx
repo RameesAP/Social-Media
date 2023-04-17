@@ -16,7 +16,8 @@ const PostShare = () => {
   const dispatch = useDispatch()
   const desc = useRef()
   const { user } = useSelector((state) => state.authReducer.authData)
-  const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER
+  // const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER
+  const serverPublic = "https://mern-socialmedia-main-server.onrender.com/images"
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
