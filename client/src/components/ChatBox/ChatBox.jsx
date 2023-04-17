@@ -8,6 +8,7 @@ import InputEmoji from 'react-input-emoji'
 
 
 const ChatBox = ({ chat, currentUser, setSendMessage, recieveMessage }) => {
+    const serverPublic = "https://mern-socialmedia-main-server.onrender.com/images/"
 
     const [userData, setUserData] = useState(null)
     const [messages, setMessages] = useState([])
@@ -107,9 +108,9 @@ const ChatBox = ({ chat, currentUser, setSendMessage, recieveMessage }) => {
                                 <img
                                     src={
                                         userData?.profilePicture
-                                            ? process.env.REACT_APP_PUBLIC_FOLDER +
+                                            ? serverPublic +
                                             userData.profilePicture
-                                            : process.env.REACT_APP_PUBLIC_FOLDER +
+                                            :serverPublic +
                                             'defaultProfile.png'
                                     }
                                     alt=""
