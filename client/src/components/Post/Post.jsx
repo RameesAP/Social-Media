@@ -9,6 +9,7 @@ import { likePost } from '../../api/PostRequest'
 
 const Post = ({ data }) => {
 
+  const serverPublic = "https://mern-socialmedia-main-server.onrender.com/images/"
   const { user } = useSelector((state) => state.authReducer.authData)
 
   const [liked, setLiked] = useState(data.likes.includes(user._id))
@@ -21,7 +22,8 @@ const Post = ({ data }) => {
   }
   return (
     <div className='Post'>
-      <img src={data.image ? process.env.REACT_APP_PUBLIC_FOLDER + data.image : ""} alt="" />
+      {/* <img src={data.image ? process.env.REACT_APP_PUBLIC_FOLDER + data.image : ""} alt="" /> */}
+      <img src={data.image ? serverPublic + data.image : ""} alt="" />
 
       <div className='postReact'>
         <img src={liked ? Heart : NotLike} alt="" style={{ cursor: "pointer" }} onClick={handleLike} />
