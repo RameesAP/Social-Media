@@ -1,6 +1,6 @@
 const io = require('socket.io')(8800, {
     cors: {
-        origin: "https://rococo-cuchufli-85cf33.netlify.app"
+        origin: "https://mern-socialmedia-socket-server.onrender.com"
     }
 })
 

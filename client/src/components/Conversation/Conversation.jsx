@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getUser } from '../../api/UserRequest'
 
 const Conversation = ({ data, currentUserId ,online}) => {
+    const serverPublic = "https://mern-socialmedia-main-server.onrender.com/images/"
 
     const [userData, setUserData] = useState(null)
 
@@ -24,8 +25,11 @@ const Conversation = ({ data, currentUserId ,online}) => {
             <div className='follower conversation'>
                 <div>
                     {online && <div className='online-dot'></div>}
-                    <img src={userData?.profilePicture ? process.env.
-                        REACT_APP_PUBLIC_FOLDER + userData.profilePicture : process.env.REACT_APP_PUBLIC_FOLDER + 'defaultProfile.png'} alt=""
+                    {/* <img src={userData?.profilePicture ? process.env.REACT_APP_PUBLIC_FOLDER + userData.profilePicture : process.env.REACT_APP_PUBLIC_FOLDER + 'defaultProfile.png'} alt=""
+                        className='followerImage'
+                        style={{ width: '50px', height: '50px' }}
+                    /> */}
+                     <img src={userData?.profilePicture ? serverPublic + userData.profilePicture : serverPublic + 'defaultProfile.png'} alt=""
                         className='followerImage'
                         style={{ width: '50px', height: '50px' }}
                     />
